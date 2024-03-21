@@ -27,5 +27,5 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(driver):
     page.open()
     page.go_to_basket()
     basket_page = BasketPage(driver, driver.current_url)
-    basket_page.should_not_be_items_in_basket()
-    basket_page.should_be_basket_is_empty_text()
+    basket_page.should_have_no_items_in_basket()
+    basket_page.should_have_empty_basket_text()
