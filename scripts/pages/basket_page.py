@@ -9,7 +9,7 @@ class BasketPageLocators:
 
 class BasketPage(BasePage):
     def should_be_basket_is_empty_text(self):
-        basket_is_empty_text = self.browser.find_element(*BasketPageLocators.BASKET_IS_EMPTY_TEXT).text
+        basket_is_empty_text = self.driver.find_element(*BasketPageLocators.BASKET_IS_EMPTY_TEXT).text
         assert "Your basket is empty" in basket_is_empty_text, "No basket is empty text"
 
     def should_not_be_items_in_basket(self):
