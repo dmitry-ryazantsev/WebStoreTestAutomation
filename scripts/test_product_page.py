@@ -3,13 +3,10 @@ from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 import pytest
 
-base_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
-urls = [f"{base_link}?promo=offer{n}" for n in range(10)]
 
-
-@pytest.mark.skip
-@pytest.mark.parametrize('link', urls)
-def test_guest_can_add_product_to_basket(driver, link):
+@pytest.mark.parametrize('promo_offer', range(10))
+def test_guest_can_add_product_to_basket(driver, promo_offer):
+    link = ProductPage.LINK_CODERS_AT_WORK + f"?promo=offer{promo_offer}"
     page = ProductPage(driver, link)
     page.open()
     page.add_to_cart()
@@ -19,8 +16,7 @@ def test_guest_can_add_product_to_basket(driver, link):
 
 
 def test_guest_can_go_to_login_page_from_product_page(driver):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-    page = ProductPage(driver, link)
+    page = ProductPage(driver, ProductPage.LINK_CITY_AND_STARS)
     page.open()
     page.go_to_login_page()
     login_page = LoginPage(driver, driver.current_url)
@@ -28,8 +24,7 @@ def test_guest_can_go_to_login_page_from_product_page(driver):
 
 
 def test_guest_cant_see_product_in_basket_opened_from_product_page(driver):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-    page = ProductPage(driver, link)
+    page = ProductPage(driver, ProductPage.LINK_CITY_AND_STARS)
     page.open()
     page.go_to_basket()
     basket_page = BasketPage(driver, driver.current_url)
@@ -37,22 +32,21 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(driver):
     basket_page.should_have_empty_basket_text()
 
 
-@pytest.mark.skip
+@pytest.mark.xfail
 def test_guest_cant_see_success_message_after_adding_product_to_basket(driver):
-    page = ProductPage(driver, base_link)
+    page = ProductPage(driver, ProductPage.LINK_CITY_AND_STARS)
     page.open()
     page.add_to_cart()
     page.should_have_no_item_added_successfully_text()
 
 
 def test_guest_cant_see_success_message(driver):
-    page = ProductPage(driver, base_link)
+    page = ProductPage(driver, ProductPage.LINK_CITY_AND_STARS)
     page.open()
     page.should_have_no_item_added_successfully_text()
 
 
 def test_guest_should_see_login_link_on_product_page(driver):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-    page = ProductPage(driver, link)
+    page = ProductPage(driver, ProductPage.LINK_CITY_AND_STARS)
     page.open()
     page.should_be_login_link()

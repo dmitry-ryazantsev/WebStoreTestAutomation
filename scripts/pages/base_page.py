@@ -14,7 +14,9 @@ class BasePageLocators:
 
 class BasePage:
     # the driver is called from conftest.py
-    def __init__(self, driver, url, timeout=10):
+    BASE_URL = "http://selenium1py.pythonanywhere.com/"
+
+    def __init__(self, driver, url, timeout=5):
         self.driver = driver
         self.url = url
         self.driver.implicitly_wait(timeout)

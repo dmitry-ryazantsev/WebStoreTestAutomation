@@ -11,6 +11,9 @@ class ProductPageLocators:
 
 
 class ProductPage(BasePage):
+    LINK_CITY_AND_STARS = "http://selenium1py.pythonanywhere.com/catalogue/the-city-and-the-stars_95/"
+    LINK_CODERS_AT_WORK = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+
     def add_to_cart(self):
         cart_button = self.driver.find_element(*ProductPageLocators.ADD_TO_CART_BUTTON)
         cart_button.click()
