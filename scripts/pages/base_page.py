@@ -7,9 +7,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePageLocators:
-    BASKET_LINK = (By.CSS_SELECTOR, ".basket-mini a.btn-default ")
+    BASKET_LINK = (By.CSS_SELECTOR, ".basket-mini a.btn")
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
 
 class BasePage:
